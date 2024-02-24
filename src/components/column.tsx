@@ -1,10 +1,11 @@
-import Paper from "./ui/paper";
+import { SortableContext, useSortable } from "@dnd-kit/sortable";
 import { ColumnType } from "@/types";
-import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { useStore } from "@/store/useStore";
 import ColumnDropdown from "./column-dropdown";
 import AddTaskSheet from "./add-task-sheet";
-import { useStore } from "@/store/useStore";
+import TaskCard from "./task-card";
+import Paper from "./ui/paper";
 
 type ColumnProps = {
   column: ColumnType;
@@ -68,16 +69,15 @@ function Column({ column }: ColumnProps) {
         <ColumnDropdown columnId={column.id} />
       </Paper>
 
-      {/* ADD TASK */}
       <AddTaskSheet columnId={column.id} />
 
       {/* TASKS */}
-      <div className="h-full overflow-y-auto py-2 space-y-2">
-        {tasks.map((task) => (
-          <Paper key={task.id} className="py-6 font-semibold text-sm">
-            {task.content}
-          </Paper>
-        ))}
+      <div className="h-full overflow-y-auto overflow-x-hidden py-2 space-y-2 px-[1px]">
+        <SortableContext items={tasks.map((task) => task.id)}>
+          {tasks.map((task) => (
+            <TaskCard task={task} key={task.id} />
+          ))}
+        </SortableContext>
       </div>
     </div>
   );
