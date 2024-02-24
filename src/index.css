@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 264, 38%, 96.5%;
+    --foreground: 224 71.4% 4.1%;
+
+    --card: 260, 43%, 99%;
+    --card-foreground: 224 71.4% 4.1%;
+
+    --primary: 262.1 83.3% 57.8%;
+    --primary-foreground: 210 20% 98%;
+
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+
+    --muted: 260, 43%, 97.7%;
+    --muted-foreground: 220 8.9% 46.1%;
+
+    --accent: 260, 43%, 99%;
+    --accent-foreground: 220.9 39.3% 11%;
+
+    --danger: 0 59.2% 50.2%;
+    --danger-foreground: 210 20% 98%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 262.1 83.3% 57.8%;
+
+    --radius: 0.35rem;
+  }
+
+  .dark {
+    color-scheme: dark;
+
+    --background: 225, 17%, 9%;
+    --foreground: 210 20% 98%;
+
+    --card: 232, 11%, 13%;
+    --card-foreground: 210 20% 98%;
+
+    --primary: 263.4 70% 50.4%;
+    --primary-foreground: 210 20% 98%;
+
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
+
+    --muted: 232, 11%, 11%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+
+    --accent: 232, 11%, 13%;
+    --accent-foreground: 210 20% 98%;
+
+    --danger: 0 52.8% 45.6%;
+    --danger-foreground: 210 20% 98%;
+
+    --border: 215 27.9% 8.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 263.4 70% 50.4%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply overflow-x-hidden bg-background text-foreground;
+  }
+}
