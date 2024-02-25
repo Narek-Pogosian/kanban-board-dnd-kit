@@ -41,7 +41,7 @@ function Column({ column }: ColumnProps) {
       <div
         ref={setNodeRef}
         style={style}
-        className="h-full w-80 shrink-0 opacity-40 space-y-2"
+        className="h-full w-80 shrink-0 opacity-60 space-y-2"
       >
         <Paper className="h-14"></Paper>
         <Paper className="h-28"></Paper>

@@ -1,5 +1,5 @@
-import { TaskType } from "@/types";
 import Paper from "./ui/paper";
+import { TaskType } from "@/types";
 import { Button } from "./ui/button";
 import { Trash } from "lucide-react";
 import { useStore } from "@/store/useStore";
@@ -29,8 +29,8 @@ function TaskCard({ task }: TaskCardProps) {
   });
 
   const style = {
-    transition,
     transform: CSS.Transform.toString(transform),
+    transition,
   };
 
   if (isDragging) {
@@ -38,7 +38,6 @@ function TaskCard({ task }: TaskCardProps) {
       <Paper className="py-6 opacity-30 group font-semibold text-sm flex justify-between border hover:border-primary/60 transition-colors duration-300">
         {task.content}
         <Button
-          onClick={() => deleteTask(task.id)}
           size="icon"
           variant="dangerOutline"
           className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -48,14 +47,14 @@ function TaskCard({ task }: TaskCardProps) {
       </Paper>
     );
   }
-
+  console.log("TASKCARD");
   return (
     <Paper
       className="py-6 group font-semibold text-sm flex justify-between border hover:border-primary/60 transition-colors duration-300"
       ref={setNodeRef}
+      style={style}
       {...attributes}
       {...listeners}
-      style={style}
     >
       {task.content}
       <Button

@@ -24,28 +24,30 @@ function KanbanBoard() {
   const setColumns = useStore((state) => state.setColumns);
   const setTasks = useStore((state) => state.setTasks);
   const tasks = useStore((state) => state.tasks);
-
+  console.log(tasks);
   const [activeColumn, setActiveColumn] = useState<ColumnType | null>(null);
   const [activeTask, setActiveTask] = useState<TaskType | null>(null);
 
   const sensors = useSensors(
-    // Need to move the column 5px for it to be considered as dragging
-    useSensor(PointerSensor, { activationConstraint: { distance: 5 } })
+    // Need to move the column 10px for it to be considered as dragging
+    useSensor(PointerSensor, { activationConstraint: { distance: 10 } })
   );
 
   function onDragStart(event: DragStartEvent) {
-    if (event.active.data.current?.type === "column") {
-      setActiveColumn(event.active.data.current.column);
-      return;
-    }
-
     if (event.active.data.current?.type === "task") {
       setActiveTask(event.active.data.current.task);
+      return;
+    }
+    if (event.active.data.current?.type === "column") {
+      setActiveColumn(event.active.data.current.column);
       return;
     }
   }
 
   function onDragEnd(event: DragEndEvent) {
+    setActiveColumn(null);
+    setActiveTask(null);
+
     const { active, over } = event;
     if (!over) return;
 
@@ -63,11 +65,8 @@ function KanbanBoard() {
 
       setColumns(arrayMove(columns, activeIndex, overIndex));
     }
-
-    setActiveColumn(null);
-    setActiveTask(null);
   }
-
+  console.log("RERENDER");
   function onDragOver(event: DragOverEvent) {
     const { active, over } = event;
     if (!over || !active) return;
@@ -76,7 +75,7 @@ function KanbanBoard() {
     const overId = over.id;
 
     if (activeId === overId) return;
-
+    console.log("DRAGGING OVER");
     const isActiveTask = active.data.current?.type === "task";
     const isOverTask = over.data.current?.type === "task";
 
@@ -87,8 +86,7 @@ function KanbanBoard() {
       const activeIndex = tasks.findIndex((t) => t.id === activeId);
       const overIndex = tasks.findIndex((t) => t.id === overId);
 
-      // TODO: Causing crash, FIX
-      setTasks(arrayMove(tasks, activeIndex, overIndex));
+      setTasks(arrayMove(tasks, activeIndex, overIndex - 1));
     }
 
     const isOverAColumn = over.data.current?.type === "column";
@@ -130,8 +128,8 @@ function KanbanBoard() {
       </div>
       {createPortal(
         <DragOverlay>
-          {activeColumn && <Column column={activeColumn} />}
           {activeTask && <TaskCard task={activeTask} />}
+          {activeColumn && <Column column={activeColumn} />}
         </DragOverlay>,
         document.body
       )}

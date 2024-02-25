@@ -7,12 +7,15 @@ import {
 import { useStore } from "@/store/useStore";
 import { MoreHorizontal, Trash } from "lucide-react";
 import { Button } from "./ui/button";
+import { memo } from "react";
 
 type ColumnDropdownProps = {
   columnId: string;
 };
 
-function ColumnDropdown({ columnId }: ColumnDropdownProps) {
+const ColumnDropdown = memo(function ColumnDropdown({
+  columnId,
+}: ColumnDropdownProps) {
   const removeColumn = useStore((state) => state.deleteColumn);
 
   return (
@@ -32,6 +35,6 @@ function ColumnDropdown({ columnId }: ColumnDropdownProps) {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+});
 
 export default ColumnDropdown;
