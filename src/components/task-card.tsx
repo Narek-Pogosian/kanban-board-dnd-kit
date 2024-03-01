@@ -47,7 +47,7 @@ function TaskCard({ task }: TaskCardProps) {
       </Paper>
     );
   }
-  console.log("TASKCARD");
+
   return (
     <Paper
       className="py-6 group font-semibold text-sm flex justify-between border hover:border-primary/60 transition-colors duration-300"

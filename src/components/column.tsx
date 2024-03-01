@@ -1,4 +1,4 @@
-import { SortableContext, useSortable } from "@dnd-kit/sortable";
+import { SortableContext, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { ColumnType } from "@/types";
 import { CSS } from "@dnd-kit/utilities";
 import { useStore } from "@/store/useStore";
@@ -73,7 +73,7 @@ function Column({ column }: ColumnProps) {
 
       {/* TASKS */}
       <div className="h-full overflow-y-auto overflow-x-hidden py-2 space-y-2 px-[1px]">
-        <SortableContext items={tasks.map((task) => task.id)}>
+        <SortableContext items={tasks.map((task) => task.id)} strategy={verticalListSortingStrategy}>
           {tasks.map((task) => (
             <TaskCard task={task} key={task.id} />
           ))}
