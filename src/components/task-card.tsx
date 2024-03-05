@@ -13,40 +13,19 @@ type TaskCardProps = {
 function TaskCard({ task }: TaskCardProps) {
   const deleteTask = useStore((state) => state.deleteTask);
 
-  const {
-    setNodeRef,
-    attributes,
-    listeners,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({
-    id: task.id,
-    data: {
-      type: "task",
-      task,
-    },
-  });
+  const { setNodeRef, attributes, listeners, transform, transition } =
+    useSortable({
+      id: task.id,
+      data: {
+        type: "task",
+        task,
+      },
+    });
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
   };
-
-  if (isDragging) {
-    return (
-      <Paper className="py-6 opacity-30 group font-semibold text-sm flex justify-between border hover:border-primary/60 transition-colors duration-300">
-        {task.content}
-        <Button
-          size="icon"
-          variant="dangerOutline"
-          className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        >
-          <Trash className="size-5" />
-        </Button>
-      </Paper>
-    );
-  }
 
   return (
     <Paper

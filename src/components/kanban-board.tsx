@@ -111,11 +111,12 @@ function KanbanBoard() {
       const overColumnId = over.data.current?.column.id;
 
       if (currentColumnId !== overColumnId) {
-        setTasks(
-          tasks.map((task) =>
-            task.id === activeId ? { ...task, columnId: overColumnId } : task
-          )
+        const taskid = tasks.findIndex((task) => task.id === activeId);
+        const updatedTasks = tasks.map((task) =>
+          task.id === activeId ? { ...task, columnId: overColumnId } : task
         );
+
+        setTasks(arrayMove(updatedTasks, taskid, updatedTasks.length - 1));
       }
     }
   }
